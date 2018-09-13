@@ -1,15 +1,35 @@
 import Vue from "vue";
+// 第一步： 引入Router， 一种：cdn， 另外一种：直接import
 import Router from "vue-router";
 import Home from "./views/Home.vue";
+import Login from "./views/Login";
 
+// 第二步：使用use注册Router插件
 Vue.use(Router);
 
+// 第三步：创建路由对象
 export default new Router({
   routes: [
     {
       path: "/",
       name: "home",
       component: Home
+    },
+    {
+      path: "/login",
+      name: "login",
+      component: Login
+    },
+    {
+      path: "/user/:id",
+      name: "user",
+      component: () => import("./views/UserInfo.vue")
+    },
+    {
+      path: "/product/:id",
+      name: "product",
+      props: true,
+      component: () => import("./views/Product.vue")
     },
     {
       path: "/about",
