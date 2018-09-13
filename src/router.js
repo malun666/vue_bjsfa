@@ -3,7 +3,8 @@ import Vue from "vue";
 import Router from "vue-router";
 import Home from "./views/Home.vue";
 import Login from "./views/Login";
-
+import AddUser from "./views/User/AddUser.vue";
+import EditUser from "./views/User/EditUser.vue";
 // 第二步：使用use注册Router插件
 Vue.use(Router);
 
@@ -23,7 +24,20 @@ export default new Router({
     {
       path: "/user/:id",
       name: "user",
-      component: () => import("./views/UserInfo.vue")
+      component: () => import("./views/UserInfo.vue"),
+      redirect: to => {
+        return `/user/${to.params.id}/add`;
+      },
+      children: [
+        {
+          path: "add", // /user/3333/add
+          component: AddUser
+        },
+        {
+          path: "edit",
+          component: EditUser
+        }
+      ]
     },
     {
       path: "/product/:id",
