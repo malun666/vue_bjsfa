@@ -4,11 +4,34 @@
       <router-link to="/">Home</router-link> |
       <router-link to="/about">About</router-link> |
       <router-link to="/login">Login</router-link> |
-      <router-link to="/User/9999">跳转到用户页面</router-link>
+      <router-link :to="UserUrl">跳转到用户页面</router-link>
     </div>
+    <hr>
+    <input type="button" value="跳转到用户页面" @click="$router.push('/User/666666')">
+    <input type="button" value="跳转到用户页面8888" @click="$router.push({name: 'user', params: {id: 8888}})">
+    <input type="button" value="跳转到用户页面home" @click="navToHome">
+    <input type="button" value="后退一页" @click="backPage">
+    <hr>
     <router-view/>
   </div>
 </template>
+<script>
+export default {
+  data: function() {
+    return {
+      UserUrl: "/User/090909"
+    };
+  },
+  methods: {
+    navToHome() {
+      this.$router.push("home");
+    },
+    backPage() {
+      this.$router.go(-1);
+    }
+  }
+};
+</script>
 
 <style lang="scss">
 #app {
