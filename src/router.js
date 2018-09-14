@@ -5,6 +5,10 @@ import Home from "./views/Home.vue";
 import Login from "./views/Login";
 import AddUser from "./views/User/AddUser.vue";
 import EditUser from "./views/User/EditUser.vue";
+
+import Left from "./views/Home/Left.vue";
+import Right from "./views/Home/Right.vue";
+import Footer from "./views/Home/Footer.vue";
 // 第二步：使用use注册Router插件
 Vue.use(Router);
 
@@ -14,7 +18,18 @@ export default new Router({
     {
       path: "/",
       name: "home",
-      component: Home
+      component: Home,
+      redirect: "/kk",
+      children: [
+        {
+          path: "kk",
+          components: {
+            default: Left,
+            right: Right,
+            foot: Footer
+          }
+        }
+      ]
     },
     {
       path: "/login",
