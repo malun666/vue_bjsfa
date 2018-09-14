@@ -10,6 +10,18 @@ export default {
   name: "userinfo",
   data() {
     return {};
+  },
+  beforeRouteEnter(to, from, next) {
+    console.log("组件内的守卫beforeRouteEnter");
+    next();
+  },
+  beforeRouteUpdate(to, from, next) {
+    console.log("组件内的守卫beforeRouteUpdate");
+    next();
+  },
+  beforeRouteLeave(to, from, next) {
+    console.log("组件内的守卫beforeRouteLeave");
+    next();
   }
 };
 </script>

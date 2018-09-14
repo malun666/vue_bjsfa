@@ -13,7 +13,7 @@ import Footer from "./views/Home/Footer.vue";
 Vue.use(Router);
 
 // 第三步：创建路由对象
-export default new Router({
+const router = new Router({
   routes: [
     {
       path: "/",
@@ -43,6 +43,10 @@ export default new Router({
       redirect: to => {
         return `/user/${to.params.id}/add`;
       },
+      beforeEnter: (to, from, next) => {
+        console.log("路由对象的守卫");
+        next();
+      },
       children: [
         {
           path: "add", // /user/3333/add
@@ -71,3 +75,23 @@ export default new Router({
     }
   ]
 });
+
+router.beforeEach((to, from, next) => {
+  console.log("全局的路由守卫：beforEach");
+  // console.log("to", to);
+  // console.log("from", from);
+  //应用： 前端的权限校验。
+
+  // 一定要调用next方法，调用next方法会让当前钩子依次向后执行。
+  // if (to.path != "/home") next("/home");
+  next();
+});
+router.beforeResolve((to, from, next) => {
+  console.log("全局守卫：beforeResolve");
+  // 一定要调用next方法，调用next方法会让当前钩子依次向后执行。
+  next();
+});
+router.afterEach((to, from) => {
+  console.log("全局守卫：afterEach");
+});
+export default router;
