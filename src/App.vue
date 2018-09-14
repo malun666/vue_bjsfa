@@ -12,7 +12,9 @@
     <input type="button" value="跳转到用户页面home" @click="navToHome">
     <input type="button" value="后退一页" @click="backPage">
     <hr>
-    <router-view/>
+    <transition name="rv-fade">
+      <router-view/>
+    </transition>
   </div>
 </template>
 <script>
@@ -34,6 +36,29 @@ export default {
 </script>
 
 <style lang="scss">
+.rv-fade-enter {
+  opacity: 0;
+  transform: translateY(-30px);
+}
+.rv-fade-enter-active {
+  transition: all 1s ease;
+}
+.rv-fade-enter-to {
+  opacity: 1;
+  transform: translateY(0px);
+}
+.rv-fade-leave {
+  opacity: 1;
+  transform: translateY(30px);
+}
+.rv-fade-leave-active {
+  transition: all 1s ease;
+}
+.rv-fade-leave-to {
+  opacity: 0;
+  transform: translateY(0px);
+}
+
 #app {
   font-family: "Avenir", Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
