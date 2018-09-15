@@ -10,10 +10,11 @@ import Left from "./views/Home/Left.vue";
 import Right from "./views/Home/Right.vue";
 import Footer from "./views/Home/Footer.vue";
 // 第二步：使用use注册Router插件
-Vue.use(Router);
+Vue.use(Router); // 执行组件的 install方法
 
 // 第三步：创建路由对象
 const router = new Router({
+  mode: "hash",
   routes: [
     {
       path: "/",
