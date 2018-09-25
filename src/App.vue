@@ -1,5 +1,9 @@
 <template>
   <div id="app">
+    <h1>vuex里面的num:{{$store.state.num}}</h1>
+    <hr>
+    <input type="button" value="修改全局vuex里面的num+1" @click="addVuexNum">
+    <input type="button" value="修改全局vuex里面的num-1" @click="minusVuexNum">
     <div id="nav">
       <router-link to="/">Home</router-link> |
       <router-link tag="p" to="/about">About</router-link> |
@@ -25,6 +29,12 @@ export default {
     };
   },
   methods: {
+    addVuexNum() {
+      this.$store.commit("AddNum", 1);
+    },
+    minusVuexNum() {
+      this.$store.commit("AddNum", -1);
+    },
     navToHome() {
       this.$router.push("home");
     },

@@ -5,7 +5,14 @@ import Vuex from "vuex";
 Vue.use(Vuex); // $store
 
 export default new Vuex.Store({
-  state: {},
-  mutations: {},
+  state: {
+    num: 0,
+    LoginUser: null
+  }, // 全局的状态数据
+  mutations: {
+    AddNum(state, payload) {
+      state.num += payload;
+    }
+  },
   actions: {}
 });
