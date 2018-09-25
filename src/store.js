@@ -12,7 +12,24 @@ export default new Vuex.Store({
   mutations: {
     AddNum(state, payload) {
       state.num += payload;
+    },
+    Login(state, user) {
+      if (user) {
+        state.LoginUser = user;
+      }
     }
   },
-  actions: {}
+  actions: {
+    updateNumAsync({ commit }, payload) {
+      setTimeout(() => {
+        commit("AddNum", payload);
+      }, 1000);
+    }
+  },
+  getters: {
+    // 从vuex中获取用户名,必须经过此getter进行处理
+    getLoginUserName(state) {
+      return state.LoginUser ? state.LoginUser.UserName : "未登录";
+    }
+  }
 });

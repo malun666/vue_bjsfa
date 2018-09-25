@@ -1,6 +1,7 @@
 <template>
   <div id="app">
     <h1>vuex里面的num:{{$store.state.num}}</h1>
+    <p>当前的登录用户是: {{$store.getters.getLoginUserName}}</p>
     <hr>
     <input type="button" value="修改全局vuex里面的num+1" @click="addVuexNum">
     <input type="button" value="修改全局vuex里面的num-1" @click="minusVuexNum">
