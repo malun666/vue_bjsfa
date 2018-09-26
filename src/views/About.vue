@@ -11,9 +11,11 @@
     <hr>
     <input type="text" v-model="num">
     <input type="button" value="异步action修改num" @click="asyncUpdateNum">
+    <input type="button" value="映射的异步action修改num" @click="updateNumAsync(Number(num))">
   </div>
 </template>
 <script>
+import { mapActions } from "vuex";
 import aboutd from "../components/DemoAbout";
 export default {
   data: function() {
@@ -30,7 +32,8 @@ export default {
     },
     handler(e) {
       console.log(e);
-    }
+    },
+    ...mapActions(["updateNumAsync"])
   }
 };
 </script>

@@ -1,7 +1,8 @@
 <template>
   <div id="app">
-    <h1>vuex里面的num:{{$store.state.num}}</h1>
+    <h1>vuex里面的num:{{$store.state.num}} --- {{MyNum}}</h1>
     <p>当前的登录用户是: {{$store.getters.getLoginUserName}}</p>
+    <p>{{getLoginUserName}}</p>
     <hr>
     <input type="button" value="修改全局vuex里面的num+1" @click="addVuexNum">
     <input type="button" value="修改全局vuex里面的num-1" @click="minusVuexNum">
@@ -23,11 +24,23 @@
   </div>
 </template>
 <script>
+import { mapState, mapGetters } from "vuex";
 export default {
   data: function() {
     return {
       UserUrl: "/User/090909"
     };
+  },
+  computed: {
+    getUserURL: function() {
+      return this.UserUrl.toLowerCase();
+    },
+    // ...mapState(["num", "LoginUser"]) // 把vuex中的state状态映射到组件中的计算属性中.
+    ...mapState({
+      MyNum: "num",
+      User: state => state.LoginUser
+    }),
+    ...mapGetters(["getLoginUserName"])
   },
   methods: {
     addVuexNum() {
