@@ -3,6 +3,7 @@
     <h1>vuex里面的num:{{$store.state.num}} --- {{MyNum}}</h1>
     <p>当前的登录用户是: {{$store.getters.getLoginUserName}}</p>
     <p>{{getLoginUserName}}</p>
+    <p @click="ChangeUName(Date.now()+'')">{{UName}}</p>
     <hr>
     <input type="button" value="修改全局vuex里面的num+1" @click="addVuexNum">
     <input type="button" value="修改全局vuex里面的num-1" @click="minusVuexNum">
@@ -24,7 +25,7 @@
   </div>
 </template>
 <script>
-import { mapState, mapGetters } from "vuex";
+import { mapState, mapGetters, mapMutations } from "vuex";
 export default {
   data: function() {
     return {
@@ -40,7 +41,8 @@ export default {
       MyNum: "num",
       User: state => state.LoginUser
     }),
-    ...mapGetters(["getLoginUserName"])
+    ...mapGetters(["getLoginUserName"]),
+    ...mapState("user", ["UName"])
   },
   methods: {
     addVuexNum() {
@@ -54,7 +56,8 @@ export default {
     },
     backPage() {
       this.$router.go(-1);
-    }
+    },
+    ...mapMutations("user", ["ChangeUName"])
   }
 };
 </script>
